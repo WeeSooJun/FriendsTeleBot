@@ -1,0 +1,6 @@
+/bin/
+/node_modules/
+/lambda/node_modules/
+/lambda/bin/
+.vscode
+.DS_Store
