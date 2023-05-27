@@ -73,4 +73,46 @@ const stage = new aws.apigatewayv2.Stage("apiStage", {
   autoDeploy: true,
 }, {dependsOn: [route]});
 
+// const lambdaRoleAttachmentToRds = new aws.iam.RolePolicyAttachment("lambdaRoleAttachmentToRds", {
+//   role: lambdaRole,
+//   policyArn: aws.iam.ManagedPolicy.AmazonRDSDataFullAccess,
+// })
+
+// const auroraRds = new aws.rds.Cluster("auroraRds", {
+//     availabilityZones: [
+//         "ap-southeast-1a",
+//     ],
+//     backupRetentionPeriod: 5,
+//     clusterIdentifier: "aurora-cluster-demo",
+//     databaseName: "friendstelebot",
+//     engine: "aurora-mysql",
+//     engineVersion: "8.0.mysql_aurora.3.02.0",
+//     masterPassword: "world",
+//     masterUsername: "hello",
+//     preferredBackupWindow: "07:00-09:00",
+// }, {ignoreChanges: ["availabilityZones"]});
+
+// function queryDatabase(): Promise<void> {
+//   return new Promise((resolve, reject) => {
+//       var mysql      = require('mysql');
+//       var connection = mysql.createConnection({
+//           host     : auroraRds.endpoint.get(),
+//           user     : auroraRds.masterUsername.get(),
+//           password : auroraRds.masterPassword.get(),
+//           database : auroraRds.databaseName.get(),
+//       });
+
+//       connection.connect();
+
+//       console.log("querying...")
+//       connection.query('SELECT 1 + 1 AS solution', function (error: any, results: any, fields: any) {
+//           if (error) { reject(error); return }
+//           console.log('The solution is: ', results[0].solution);
+//           resolve();
+//       });
+
+//       connection.end();
+//   });
+// }
+
 export const endpoint = pulumi.interpolate`${apigw.apiEndpoint}/${stage.name}`;

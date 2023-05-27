@@ -38,7 +38,7 @@ export const handler =  async function(event: any) {
     sendMessage();
     return {
         statusCode: 200,
-        body: "Hello, Pulumi!"
+        body: `Pulumi Works! Anyways your text is ${text}`
     };
   }
 
