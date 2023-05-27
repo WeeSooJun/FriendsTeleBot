@@ -32,13 +32,14 @@ const testInput = {
 
 export const handler =  async function(event: any) {
     console.log("EVENT: \n" + JSON.stringify(event, null, 2))
-    const text = event["body"]["message"]["text"];
+    const bodyObject = JSON.parse(event["body"])
+    const text = bodyObject["message"]["text"];
     const command = userInputHandler(text);
     console.log(command);
     sendMessage();
     return {
         statusCode: 200,
-        body: `Pulumi Works! Anyways your text is ${text}`
+        body: `Deployment Success! Anyways your text is "${text}"!`
     };
   }
 
@@ -49,4 +50,4 @@ function userInputHandler(text: string) {
     return inputArray[0];
 }
 
-handler(testInput);
+// handler(testInput);
